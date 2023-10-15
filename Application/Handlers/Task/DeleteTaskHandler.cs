@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Infrastructure.Commands.Task;
+using Infrastructure.Contracts;
+using MediatR;
 
 namespace Application.Handlers.Task
 {
-    internal class DeleteTaskHandler
+    public class DeleteTaskHandler : IRequestHandler<DeleteTaskCommand, bool>
     {
+
+        private readonly ITaskRepository _taskRepository;
+        public DeleteTaskHandler(ITaskRepository taskRepository)
+        {
+            _taskRepository = taskRepository;
+        }
+
+        public async Task<bool> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
+        {
+            return await _taskRepository.Delete(request.Id, cancellationToken);
+        }
     }
 }

@@ -1,9 +1,14 @@
-using Autofac.Core;
+using Application.Handlers.Task;
 using AutoMapper;
 using Infrastructure;
+using Infrastructure.Commands.Task;
+using Infrastructure.Contracts;
 using Infrastructure.DataAccessLayer;
+using Infrastructure.DTOs;
+using Infrastructure.Handler.Task;
+using Infrastructure.Queries.Task;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +20,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddMediatR(typeof(Program).Assembly);
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<IRequestHandler<GetAllTasksQuery, IEnumerable<TaskItemDto>>, GetAllTaskHandler>();
+builder.Services.AddScoped<IRequestHandler<GetTaskByIdQuery, TaskItemDto?>, GetTaskByIdHandler>();
+builder.Services.AddScoped<IRequestHandler<CreateTaskCommand, TaskItemDto>, CreateTaskHandler>();
+builder.Services.AddScoped<IRequestHandler<DeleteTaskCommand, bool>, DeleteTaskHandler>();
+builder.Services.AddScoped<IRequestHandler<UpdateTaskCommand, TaskItemDto?>, UpdateTaskHandler>();
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+
 
 //Automapper
 var mapperConfig = new MapperConfiguration(mapperConfig =>

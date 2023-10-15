@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Infrastructure.Contracts;
+using Infrastructure.DTOs;
+using Infrastructure.Queries.Task;
+using MediatR;
 
 namespace Application.Handlers.Task
 {
-    internal class GetTaskByIdHandler
+    public class GetTaskByIdHandler : IRequestHandler<GetTaskByIdQuery, TaskItemDto?>
     {
+        private readonly ITaskRepository _taskRepository;
+        public GetTaskByIdHandler(ITaskRepository taskRepository)
+        {
+            _taskRepository = taskRepository;
+        }
+
+        public async Task<TaskItemDto?> Handle(GetTaskByIdQuery request, CancellationToken cancellationToken)
+        {
+            return await _taskRepository.GetById(request.Id, cancellationToken);
+        }
     }
 }
