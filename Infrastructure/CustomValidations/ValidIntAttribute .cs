@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Infrastructure.ValueObject
+namespace Infrastructure.CustomValidations
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public class ValidIntAttribute : ValidationAttribute

@@ -1,4 +1,4 @@
-﻿using Infrastructure.ValueObject;
+﻿using Infrastructure.CustomValidations;
 using System.ComponentModel.DataAnnotations;
 
 namespace Infrastructure.DTOs
