@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Contracts;
 using Infrastructure.DTOs;
-using Infrastructure.Queries.Task;
+using Application.Queries.Task;
 using MediatR;
 
 namespace Application.Handlers.Task

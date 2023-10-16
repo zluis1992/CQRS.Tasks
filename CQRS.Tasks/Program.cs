@@ -1,12 +1,12 @@
 using Application.Handlers.Task;
 using AutoMapper;
 using Infrastructure;
-using Infrastructure.Commands.Task;
+using Application.Commands.Task;
 using Infrastructure.Contracts;
 using Infrastructure.DataAccessLayer;
 using Infrastructure.DTOs;
 using Infrastructure.Handler.Task;
-using Infrastructure.Queries.Task;
+using Application.Queries.Task;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;

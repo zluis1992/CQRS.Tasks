@@ -1,6 +1,6 @@
-﻿using Infrastructure.Commands.Task;
+﻿using Application.Commands.Task;
 using Infrastructure.DTOs;
-using Infrastructure.Queries.Task;
+using Application.Queries.Task;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

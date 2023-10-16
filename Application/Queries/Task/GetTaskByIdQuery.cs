@@ -1,7 +1,7 @@
 ﻿using Infrastructure.DTOs;
 using MediatR;
 
-namespace Infrastructure.Queries.Task
+namespace Application.Queries.Task
 {
     public record GetTaskByIdQuery(int Id) : IRequest<TaskItemDto?>;
 }

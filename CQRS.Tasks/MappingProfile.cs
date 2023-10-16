@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Domain;
-using Infrastructure.Commands.Task;
+using Application.Commands.Task;
 using Infrastructure.DTOs;
 
 namespace Infrastructure
@@ -10,7 +10,8 @@ namespace Infrastructure
         public MappingProfile()
         {
             CreateMap<TaskItem, TaskItemDto>().ReverseMap();
-            CreateMap<CreateTaskCommand, TaskItem>().ReverseMap();
+            CreateMap<CreateTaskCommand, TaskItemDto>();
+            CreateMap<UpdateTaskCommand, TaskItemDto>();
         }
     }
 }

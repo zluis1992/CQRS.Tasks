@@ -1,4 +1,4 @@
-﻿using Infrastructure.Commands.Task;
+﻿using Application.Commands.Task;
 using Infrastructure.Contracts;
 using MediatR;
 

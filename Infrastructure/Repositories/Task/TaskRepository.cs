@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Domain;
-using Infrastructure.Commands.Task;
 using Infrastructure.Contracts;
 using Infrastructure.DataAccessLayer;
 using Infrastructure.DTOs;
@@ -19,9 +18,9 @@ namespace Infrastructure.Handler.Task
             _mapper = mapper;
         }
 
-        public async Task<TaskItemDto> Create(CreateTaskCommand request, CancellationToken cancellationToken)
+        public async Task<TaskItemDto> Create(TaskItemDto TaskItem, CancellationToken cancellationToken)
         {
-            var oTask = _mapper.Map<CreateTaskCommand, TaskItem>(request);
+            var oTask = _mapper.Map<TaskItemDto, TaskItem>(TaskItem);
             _ctx.TaskItem.Add(oTask);
 
             await _ctx.SaveChangesAsync(cancellationToken);
@@ -60,18 +59,18 @@ namespace Infrastructure.Handler.Task
             return _mapper.Map<TaskItem, TaskItemDto>(oTaskItem);
         }
 
-        public async Task<TaskItemDto?> Update(UpdateTaskCommand request, CancellationToken cancellationToken)
+        public async Task<TaskItemDto?> Update(TaskItemDto TaskItem, CancellationToken cancellationToken)
         {
-            var oTaskItem = await _ctx.TaskItem.FindAsync(request.Id, cancellationToken);
+            var oTaskItem = await _ctx.TaskItem.FindAsync(TaskItem.Id, cancellationToken);
 
             if (oTaskItem == null)
             {
                 return null;
             }
 
-            oTaskItem.Title = request.Title;
-            oTaskItem.Description = request.Description;
-            oTaskItem.IsCompleted = request.IsCompleted;
+            oTaskItem.Title = TaskItem.Title;
+            oTaskItem.Description = TaskItem.Description;
+            oTaskItem.IsCompleted = TaskItem.IsCompleted;
 
             await _ctx.SaveChangesAsync(cancellationToken);
             return _mapper.Map<TaskItem, TaskItemDto>(oTaskItem);
