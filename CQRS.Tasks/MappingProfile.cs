@@ -10,7 +10,7 @@ namespace Infrastructure
         public MappingProfile()
         {
             CreateMap<TaskItem, TaskItemDto>().ReverseMap();
-            CreateMap<CreateTaskCommand, TaskItemDto>().ReverseMap();
+            CreateMap<CreateTaskCommand, TaskItem>().ReverseMap();
         }
     }
 }
